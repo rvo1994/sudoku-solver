@@ -2,9 +2,7 @@
 
 Find here below some best practices when using GitHub.
 
-## Launching the Front App
-
-To launch the SPA on linux or mac, you have to follow these steps (inside bash console):
+## Launching Sudoku
 
 1. Clone the repo: `git clone git@github.com:rvo1994/sudoku-solver.git`
 
