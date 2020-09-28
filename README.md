@@ -6,27 +6,10 @@ Find here below some best practices when using GitHub.
 
 To launch the SPA on linux or mac, you have to follow these steps (inside bash console):
 
-1. Clone the repo: `git clone https://github.com/FinMetricsSA/front.git`
+1. Clone the repo: `git clone git@github.com:rvo1994/sudoku-solver.git`
 
-2. Change directory: `cd front`
+2. Change directory: `cd sudoku-solver`
 
-3. Install all dependencies: `npm install`
-
-4. (If not installed yet: `npm install -g angular-cli`)
-
-5. Start app: `ng serve`
-
-On Windows (Visual Studio Code):
-
-1. Download the project from https://github.com/FinMetricsSA/front
-
-2. Open integrated terminal: `npm install`
-
-3. (If not installed yet: `npm install -g angular-cli`)
-
-4. Start app: `ng serve`
-
-Once the SPA is running, you should also run the back-end in parallel: https://github.com/FinMetricsSA/back-admin
 
 ## GitHub issues
 
@@ -91,12 +74,3 @@ When merging all changes to production branch:
 
 3. `git push`
 
-## Staging/Production Code
-
-When the project is production ready, merge all changes from dev to staging (or from staging to master). You can follow the steps here above to merge branches.
-
-Then you can generate all the static files that will be dropped on an S3 bucket:
-
-`ng build --prod`
-
-An new folder called /dist is created and contains the static files.
