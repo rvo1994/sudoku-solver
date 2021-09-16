@@ -1,22 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from sudoku_solver.sudoku import sudoku_solver
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def frontend():
-    if request.method == 'GET':
-        print('Hello World!')        
-    return render_template('content.html')
+empty_grid = [['' for i in range(9)] for i in range(9)]
 
-@app.route('/background_process_test', methods=['GET', 'POST'])
-def background_process_test():
-        solver('sudoku_solver/data/sudoku4.txt')
-        return ("nothing")
-    
-@app.route('/test', methods=['POST'])
-def my_form_post():
-    if request.method == 'POST':
+@app.route('/', methods=['GET', 'POST'])
+def form():
+    if request.method == 'GET':
+        message1 = "Enter known numbers:"
+        return render_template('form.html', grid=empty_grid, message=message1)
+    elif request.method == 'POST':
         grid = []
         for i in range(1,82):
             if request.form[str(i)] == '':
@@ -24,8 +18,14 @@ def my_form_post():
             else:
                 grid.append(int(request.form[str(i)]))
         grid = [grid[i:i+9] for i in range(0,81,9)]
-        print(sudoku_solver(grid))
-        return render_template('content.html')
+        if sudoku_solver(grid) == False:
+            message2 = "Please enter a valid grid!"
+            color1 = "pred"
+            return render_template('form.html', grid=empty_grid, message=message2, color=color1)
+        solved_grid = sudoku_solver(grid)
+        message3 = "Sudoku solved!"
+        color2 = "pgreen"
+        return render_template('form.html', grid=solved_grid, message=message3, color=color2)
 
 if __name__ == "__main__":
     app.run(debug=True)

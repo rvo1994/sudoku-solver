@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <link rel="icon" href="../static/icon.png">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <meta charset="utf-8">
+  <title>Sudoku Solver</title>
+</head>
+
+<body>
+  <h1> Sudoku Solver</h1>
+  <p class="{{color}}"> {{ message }}</p>
+  <form method="POST" name="cell_values" action="/">
+    <table id="sudoku" class="center">
+      <tbody>
+        {% set idx = namespace(value=1) %}
+        {% for row in grid %}
+        <tr>
+          {% for cell in row %}
+          <td> <input value="{{cell}}" type="text" maxlength="1" name="{{idx.value}}" autocomplete="off" /></td>
+          {% set idx.value = idx.value + 1 %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="container">
+      <button class="button" type="submit">Solve Sudoku</button>
+      <a class="button" href="/">Clear Grid</a>
+    </div>
+  </form>
+  <div>
+    <a>This app was built by <a href="https://github.com/rvo1994">rvo1994</a></a>
+  </div>
+</body>
+
+</html>

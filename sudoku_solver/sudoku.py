@@ -1,28 +1,3 @@
-def sudoku_validator(grid):
-    """Sudoku validator"""
-    valid_set = set(list(range(1, 10)))
-    print(valid_set)
-    for row in  grid:
-        if set(row) != valid_set:
-            return False
-
-    for i in range(0, 9):
-        l_n = []
-        for j in range(0, 9):
-            l_n.append(grid[j][i])
-        if set(l_n) != valid_set:
-            return False
-
-    indexes = list(range(0, 9, 3))
-    l_n = []
-    for r_r in indexes:
-        for c_c in indexes:
-            l_n = [item[0 + c_c:3 + c_c] for item in grid[0 + r_r:3 + r_r]]
-            concat_l = [j for i in l_n for j in i]
-            if set(concat_l) != valid_set:
-                return False
-    return True
-
 def find_empty(grid):
     """Find next empty position"""
     for i in range(9):
@@ -70,18 +45,11 @@ def solve(grid):
 
 def sudoku_solver(grid):
     """Sudoku solver"""
-    if not isinstance(grid, list):
-        print("not a list")
-        return 'invalid grid'
-
-    for row in grid:
-        if len(row) != 9:
-            print("invalid row length")
-            return 'invalid grid'
-
-    if len(grid) != 9:
-        print("invalid number of rows")
-        return 'invalid grid'
-
+    print(grid)
+    for row in range(9):
+        for col, num in enumerate(grid[row]):  
+            if not valid(grid, num, (row, col)) and num != 0:
+                return False 
     solve(grid)
     return grid
+
